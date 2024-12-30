@@ -1,0 +1,10 @@
+<mvc:View 
+    controllerName="de.santos.employees.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m"
+    displayBlock="true"
+>
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View>
