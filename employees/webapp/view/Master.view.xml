@@ -2,9 +2,59 @@
     controllerName="de.santos.employees.controller.Master"
     xmlns:mvc="sap.ui.core.mvc" 
     xmlns="sap.m"
+    xmlns:f="sap.f"
     displayBlock="true"
 >
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <Title id="idEmployeesReportTitle" text="{i18n>title}" wrapping="true"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+
+        </f:header>
+            
+        <f:content>
+            <Table id="idEmployeesTable" items="{employeeModel>/Employees}" growing="true">
+                <columns>
+                    <Column id="idEmployeeIdColumn" width="6rem">
+                        <Label id="idEmployeeIDLabel" text="{i18n>employeeId}"/>
+                    </Column>
+
+                    <Column id="idFullNameColumn" width="20rem">
+                        <Label id="idFullNameLabel" text="{i18n>fullName}"/>
+                    </Column>
+
+                    <Column id="idCountryColumn" width="8rem">
+                        <Label id="idCountryLabel" text="{i18n>country}"/>
+                    </Column>
+
+                    <Column id="idCityColumn" width="8rem">
+                        <Label id="idCityLabel" text="{i18n>city}"/>
+                    </Column>
+
+                    <Column id="idPostalCodeColumn" width="8rem">
+                        <Label id="idPostalCodeLabel" text="{i18n>postalCode}"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem id="idColumnListItem">
+                        <cells>
+                            <ObjectIdentifier id="idObjectIdentifier" title="{employeeModel>EmployeeID}"/>
+                            <Text id="idFullNameText" text="{employeeModel>LastName}, {employeeModel>LastName}"/>
+                            <Text id="idCountryText" text="{employeeModel>Country}"/>
+                            <Text id="idCityText" text="{employeeModel>City}"/>
+                            <Text id="idPostalCodeText" text="{employeeModel>PostalCode}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
