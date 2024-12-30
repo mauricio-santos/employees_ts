@@ -1,8 +1,10 @@
-<mvc:View 
+<mvc:View  
     controllerName="de.santos.employees.controller.Master"
     xmlns:mvc="sap.ui.core.mvc" 
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
+    xmlns:filter="sap.ui.comp.filterbar"
     displayBlock="true"
 >
     <f:DynamicPage id="idDynamicPage">
@@ -15,11 +17,44 @@
         </f:title>
 
         <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <filter:FilterBar id="idFilterBar">
+                    <filter:filterGroupItems>
 
+                        <filter:FilterGroupItem id="idAFilterGroupItem"
+                            groupName="filters"
+                            name="filterA"
+                            label="{i18n>employee}"
+                            visibleInFilterBar="true"
+                        >
+                            <filter:control>
+                                <Input id="idInput"/>
+                            </filter:control>
+                        </filter:FilterGroupItem>
+
+                        <filter:FilterGroupItem id="idBFilterGroupItem"
+                            groupName="filters"
+                            name="FilterB"
+                            label="{i18n>country}"
+                            visibleInFilterBar="true"
+                        >
+                            <filter:control>
+                                <ComboBox id="idCountriesComboBox" items="{countriesModel>/Countries}">
+                                    <core:ListItem id="idCountryListItem" 
+                                        key="{countriesModel>code}" 
+                                        text="{countriesModel>country}"
+                                    />
+                                </ComboBox>
+                            </filter:control>   
+                        </filter:FilterGroupItem>
+
+                    </filter:filterGroupItems>
+                </filter:FilterBar>
+            </f:DynamicPageHeader>
         </f:header>
             
         <f:content>
-            <Table id="idEmployeesTable" items="{employeeModel>/Employees}" growing="true">
+            <Table id="idEmployeesTable" items="{employeesModel>/Employees}" growing="true">
                 <columns>
                     <Column id="idEmployeeIdColumn" width="6rem">
                         <Label id="idEmployeeIDLabel" text="{i18n>employeeId}"/>
@@ -45,11 +80,11 @@
                 <items>
                     <ColumnListItem id="idColumnListItem">
                         <cells>
-                            <ObjectIdentifier id="idObjectIdentifier" title="{employeeModel>EmployeeID}"/>
-                            <Text id="idFullNameText" text="{employeeModel>LastName}, {employeeModel>LastName}"/>
-                            <Text id="idCountryText" text="{employeeModel>Country}"/>
-                            <Text id="idCityText" text="{employeeModel>City}"/>
-                            <Text id="idPostalCodeText" text="{employeeModel>PostalCode}"/>
+                            <ObjectIdentifier id="idObjectIdentifier" title="{employeesModel>EmployeeID}"/>
+                            <Text id="idFullNameText" text="{employeesModel>LastName}, {employeesModel>LastName}"/>
+                            <Text id="idCountryText" text="{employeesModel>Country}"/>
+                            <Text id="idCityText" text="{employeesModel>City}"/>
+                            <Text id="idPostalCodeText" text="{employeesModel>PostalCode}"/>
                         </cells>
                     </ColumnListItem>
                 </items>

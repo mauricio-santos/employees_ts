@@ -1,0 +1,38 @@
+{
+    "Countries": [
+      { "code": "ES", "country": "España" },
+      { "code": "US", "country": "Estados Unidos" },
+      { "code": "UK", "country": "Reino Unido" },
+      { "code": "MX", "country": "México" },
+      { "code": "KR", "country": "Corea del Sur" },
+      { "code": "RS", "country": "Serbia" },
+      { "code": "DE", "country": "Alemania" },
+      { "code": "IN", "country": "India" },
+      { "code": "JP", "country": "Japón" },
+      { "code": "BR", "country": "Brasil" },
+      { "code": "DE", "country": "Alemania" },
+      { "code": "IN", "country": "India" },
+      { "code": "CN", "country": "China" },
+      { "code": "TR", "country": "Turquía" },
+      { "code": "FR", "country": "Francia" },
+      { "code": "IN", "country": "India" },
+      { "code": "KR", "country": "Corea del Sur" },
+      { "code": "PT", "country": "Portugal" },
+      { "code": "EG", "country": "Egipto" },
+      { "code": "CZ", "country": "República Checa" },
+      { "code": "KR", "country": "Corea del Sur" },
+      { "code": "AR", "country": "Argentina" },
+      { "code": "DE", "country": "Alemania" },
+      { "code": "IN", "country": "India" },
+      { "code": "TW", "country": "Taiwán" },
+      { "code": "IT", "country": "Italia" },
+      { "code": "MA", "country": "Marruecos" },
+      { "code": "RU", "country": "Rusia" },
+      { "code": "CN", "country": "China" },
+      { "code": "TR", "country": "Turquía" },
+      { "code": "FR", "country": "Francia" },
+      { "code": "IN", "country": "India" },
+      { "code": "KR", "country": "Corea del Sur" }
+    ]
+  }
+  
