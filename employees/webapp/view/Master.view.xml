@@ -18,7 +18,11 @@
 
         <f:header>
             <f:DynamicPageHeader id="idDynamicPageHeader">
-                <filter:FilterBar id="idFilterBar">
+                <filter:FilterBar id="idFilterBar" 
+                    search="onFilterBarGoSearch"
+                    showClearOnFB="true"
+                    clear="onFilterBarClear"
+                >
                     <filter:filterGroupItems>
 
                         <filter:FilterGroupItem id="idAFilterGroupItem"
@@ -81,7 +85,7 @@
                     <ColumnListItem id="idColumnListItem">
                         <cells>
                             <ObjectIdentifier id="idObjectIdentifier" title="{employeesModel>EmployeeID}"/>
-                            <Text id="idFullNameText" text="{employeesModel>LastName}, {employeesModel>LastName}"/>
+                            <Text id="idFullNameText" text="{employeesModel>LastName}, {employeesModel>FirstName}"/>
                             <Text id="idCountryText" text="{employeesModel>Country}"/>
                             <Text id="idCityText" text="{employeesModel>City}"/>
                             <Text id="idPostalCodeText" text="{employeesModel>PostalCode}"/>
