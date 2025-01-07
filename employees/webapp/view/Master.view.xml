@@ -45,12 +45,12 @@
                             visibleInFilterBar="true"
                         >
                             <filter:control>
-                                <ComboBox id="idCountriesComboBox" items="{countriesModel>/Countries}" selectedKey="{filtersModel>/Country}" selectionChange="onFilterGeneric">
+                                <MultiComboBox id="idCountriesMultiComboBox" items="{countriesModel>/Countries}" selectedKeys="{filtersModel>/Country}" selectionChange="onFilterGeneric">
                                     <core:ListItem id="idCountryListItem" 
                                         key="{countriesModel>code}" 
-                                        text="{countriesModel>country}"
+                                        text="{countriesModel>country} ({countriesModel>code})"
                                     />
-                                </ComboBox>
+                                </MultiComboBox>
                             </filter:control>   
                         </filter:FilterGroupItem>
 

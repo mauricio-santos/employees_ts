@@ -23,6 +23,6 @@ export default class Component extends BaseComponent {
         this.getRouter().initialize();
 
         // set the device model
-        this.setModel(createDeviceModel(), "device");
+        this.setModel(createDeviceModel(), "device");        
 	}
 }

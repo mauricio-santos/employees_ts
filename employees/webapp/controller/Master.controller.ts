@@ -3,12 +3,12 @@ import JSONModel from "sap/ui/model/json/JSONModel";
 import { FilterBar$SearchEvent, FilterBar$ClearEvent } from "sap/ui/comp/filterbar/FilterBar";
 import Control from "sap/ui/core/Control";
 import Input from "sap/m/Input";
-import ComboBox from "sap/m/ComboBox";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Table from "sap/m/Table";
 import ListBinding from "sap/ui/model/ListBinding";
 import Model from "sap/ui/model/Model";
+import MultiComboBox from "sap/m/MultiComboBox";
 
 /**
  * @namespace de.santos.employees.controller
@@ -34,9 +34,9 @@ export default class Master extends BaseController {
     };
 
     private loadFilters(): void {
-        const data: {Employee: string, Country: string} = {
+        const data: {Employee: string, Country: Array<string>} = {
             Employee: "",
-            Country: ""
+            Country: []
         } ;
         const model = new JSONModel(data) as JSONModel;
         this.setModelHelper(model, "filtersModel");
@@ -46,10 +46,9 @@ export default class Master extends BaseController {
     public onFilterBarGoSearch(event: FilterBar$SearchEvent): void {
         const controls = event.getParameter("selectionSet") as Control[];
         const input = controls[0] as Input;
-        const comboBox = controls[1] as ComboBox;
+        const multiComboBox = controls[1] as MultiComboBox;
         const employee = input.getValue() as String;
-        const country = comboBox.getSelectedKey() as String;
-
+        const countrySelections = multiComboBox.getSelectedKeys() as Array<string>;
         const filters = [];
 
         if (employee) {
@@ -68,7 +67,9 @@ export default class Master extends BaseController {
             }));
         }
 
-        country && filters.push(new Filter("Country", FilterOperator.EQ, country))
+        countrySelections.forEach((countryKey: string) => {
+            filters.push(new Filter("Country", FilterOperator.EQ, countryKey))
+        }); 
 
         const table = this.byId("idEmployeesTable") as Table;
         const binding = table.getBinding("items") as ListBinding;
@@ -78,18 +79,17 @@ export default class Master extends BaseController {
     public onFilterBarClear(event: FilterBar$ClearEvent) {
         const controls = event.getParameter("selectionSet") as Control[];
         const input = controls[0] as Input;
-        const comboBox = controls[1] as ComboBox;
+        const multiComboBox = controls[1] as MultiComboBox;        
         
         input.setValue("");
-        comboBox.setSelectedKey("");
+        multiComboBox.setSelectedKeys([]);
         this.onFilterBarGoSearch(event);
     };
 
     public onFilterGeneric(): void {
         const model = this.getModelHelper("filtersModel") as Model;
         const employee = model.getProperty("/Employee");
-        const country = model.getProperty("/Country");
-
+        const countrySelections = model.getProperty("/Country");       
         const filters = [];
 
         if (employee) {
@@ -108,7 +108,9 @@ export default class Master extends BaseController {
             }));
         }
 
-        country && filters.push(new Filter("Country", FilterOperator.EQ, country))
+        countrySelections.forEach((countryKey: string) => {
+            filters.push(new Filter("Country", FilterOperator.EQ, countryKey));            
+        }); 
 
         const table = this.byId("idEmployeesTable") as Table;
         const binding = table.getBinding("items") as ListBinding;
