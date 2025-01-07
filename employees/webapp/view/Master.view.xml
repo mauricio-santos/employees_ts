@@ -20,8 +20,10 @@
             <f:DynamicPageHeader id="idDynamicPageHeader">
                 <filter:FilterBar id="idFilterBar" 
                     search="onFilterBarGoSearch"
+                    showGoOnFB="false"
                     showClearOnFB="true"
                     clear="onFilterBarClear"
+                    showFilterConfiguration="false"
                 >
                     <filter:filterGroupItems>
 
@@ -32,7 +34,7 @@
                             visibleInFilterBar="true"
                         >
                             <filter:control>
-                                <Input id="idInput"/>
+                                <Input id="idEmployeeInput" value="{filtersModel>/Employee}" valueLiveUpdate="true" liveChange="onFilterGeneric"/>
                             </filter:control>
                         </filter:FilterGroupItem>
 
@@ -43,7 +45,7 @@
                             visibleInFilterBar="true"
                         >
                             <filter:control>
-                                <ComboBox id="idCountriesComboBox" items="{countriesModel>/Countries}">
+                                <ComboBox id="idCountriesComboBox" items="{countriesModel>/Countries}" selectedKey="{filtersModel>/Country}" selectionChange="onFilterGeneric">
                                     <core:ListItem id="idCountryListItem" 
                                         key="{countriesModel>code}" 
                                         text="{countriesModel>country}"
