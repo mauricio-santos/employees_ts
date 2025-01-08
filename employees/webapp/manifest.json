@@ -80,12 +80,21 @@
                 }
             ],
             "targets": {
+                "TargetContainer": {
+                    "viewType": "XML",
+                    "transition": "flip",
+                    "viewId": "Container",
+                    "viewName": "Container"
+                },
                 "TargetMaster": {
                     "viewType": "XML",
                     "transition": "slide",
                     "clearControlAggregation": false,
                     "viewId": "Master",
-                    "viewName": "Master"
+                    "viewName": "Master",
+                    "parent": "TargetContainer",
+                    "controlId": "idFlexibleColumnLayout",
+                    "controlAggregation": "beginColumnPages"
                 }
             }
         },

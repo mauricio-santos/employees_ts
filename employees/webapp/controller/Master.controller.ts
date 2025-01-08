@@ -1,5 +1,4 @@
 import BaseController from "../helpers/BaseController";
-import JSONModel from "sap/ui/model/json/JSONModel";
 import { FilterBar$SearchEvent, FilterBar$ClearEvent } from "sap/ui/comp/filterbar/FilterBar";
 import Control from "sap/ui/core/Control";
 import Input from "sap/m/Input";
@@ -19,32 +18,8 @@ import ResourceBundle from "sap/base/i18n/ResourceBundle";
 export default class Master extends BaseController {
 
     public onInit(): void {
-        this.loadEmployees();
-        this.loadCountries();
-        this.loadFilters();
-    };
 
-    private loadEmployees(): void {
-        const model = new JSONModel() as JSONModel;
-        model.loadData("../model/Employees.json");
-        this.setModelHelper(model, "employeesModel");
     };
-
-    private loadCountries(): void {
-        const model = new JSONModel() as JSONModel;
-        model.loadData("../model/Countries.json");
-        this.setModelHelper(model, "countriesModel");
-    };
-
-    private loadFilters(): void {
-        const data: {Employee: string, Country: Array<string>} = {
-            Employee: "",
-            Country: []
-        } ;
-        const model = new JSONModel(data) as JSONModel;
-        this.setModelHelper(model, "filtersModel");
-        
-    }
 
     public onFilterBarGoSearch(event: FilterBar$SearchEvent): void {
         const controls = event.getParameter("selectionSet") as Control[];
@@ -126,7 +101,6 @@ export default class Master extends BaseController {
         const i18n = this.getResourceBundleHelper() as ResourceBundle;
         const text = `${i18n.getText("employeesList")} (${total})`;
         
-        headerTitle.setProperty("text", text)
-        
-    }
+        headerTitle.setProperty("text", text);
+    };
 }

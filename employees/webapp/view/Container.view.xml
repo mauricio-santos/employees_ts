@@ -1,0 +1,17 @@
+<mvc:View controllerName="de.santos.employees.controller.Container"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+>
+	<f:FlexibleColumnLayout id="idFlexibleColumnLayout">
+		<f:beginColumnPages>
+			<mvc:XMLView id="idMasterXMLView" viewName="de.santos.employees.view.Master" type="XML"/>
+		</f:beginColumnPages>
+
+		<f:midColumnPages>
+
+		</f:midColumnPages>
+
+	</f:FlexibleColumnLayout>
+
+</mvc:View>
