@@ -24,6 +24,7 @@
                     showClearOnFB="true"
                     clear="onFilterBarClear"
                     showFilterConfiguration="false"
+                    useToolbar="{= !${device>/system/phone}}"
                 >
                     <filter:filterGroupItems>
 
@@ -66,19 +67,19 @@
                         <Label id="idEmployeeIDLabel" text="{i18n>employeeId}"/>
                     </Column>
 
-                    <Column id="idFullNameColumn" width="20rem">
+                    <Column id="idFullNameColumn" width="20rem" minScreenWidth="Tablet" demandPopin="true">
                         <Label id="idFullNameLabel" text="{i18n>fullName}"/>
                     </Column>
 
-                    <Column id="idCountryColumn" width="8rem">
+                    <Column id="idCountryColumn" width="8rem" minScreenWidth="Tablet" demandPopin="true">
                         <Label id="idCountryLabel" text="{i18n>country}"/>
                     </Column>
 
-                    <Column id="idCityColumn" width="8rem">
+                    <Column id="idCityColumn" width="8rem" minScreenWidth="Tablet">
                         <Label id="idCityLabel" text="{i18n>city}"/>
                     </Column>
 
-                    <Column id="idPostalCodeColumn" width="8rem">
+                    <Column id="idPostalCodeColumn" width="8rem" minScreenWidth="Desktop">
                         <Label id="idPostalCodeLabel" text="{i18n>postalCode}"/>
                     </Column>
                 </columns>
