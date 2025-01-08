@@ -61,7 +61,17 @@
         </f:header>
             
         <f:content>
-            <Table id="idEmployeesTable" items="{employeesModel>/Employees}" growing="true">
+            <Table id="idEmployeesTable" 
+                items="{employeesModel>/Employees}" 
+                growing="true"
+                growingScrollToLoad="true"
+                updateFinished="onEmployeesTableUpdateFinished"
+            >
+            <headerToolbar>
+                <Toolbar id="idTitleToolbar">
+                    <Title id="idEmployeesListTitle" text="{i18n>employeesList}"/>
+                </Toolbar>
+            </headerToolbar>
                 <columns>
                     <Column id="idEmployeeIdColumn" width="6rem">
                         <Label id="idEmployeeIDLabel" text="{i18n>employeeId}"/>

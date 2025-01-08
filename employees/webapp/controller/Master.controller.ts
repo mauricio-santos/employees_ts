@@ -9,6 +9,9 @@ import Table from "sap/m/Table";
 import ListBinding from "sap/ui/model/ListBinding";
 import Model from "sap/ui/model/Model";
 import MultiComboBox from "sap/m/MultiComboBox";
+import { ListBase$UpdateFinishedEvent } from "sap/m/ListBase";
+import Title from "sap/m/Title";
+import ResourceBundle from "sap/base/i18n/ResourceBundle";
 
 /**
  * @namespace de.santos.employees.controller
@@ -115,6 +118,15 @@ export default class Master extends BaseController {
         const table = this.byId("idEmployeesTable") as Table;
         const binding = table.getBinding("items") as ListBinding;
         binding.filter(filters); 
+    };
+
+    public onEmployeesTableUpdateFinished(event: ListBase$UpdateFinishedEvent) {
+        const total = event.getParameter("total");
+        const headerTitle = this.byId("idEmployeesListTitle") as Title
+        const i18n = this.getResourceBundleHelper() as ResourceBundle;
+        const text = `${i18n.getText("employeesList")} (${total})`;
+        
+        headerTitle.setProperty("text", text)
         
     }
 }
