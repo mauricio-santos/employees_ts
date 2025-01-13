@@ -3,13 +3,13 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:f="sap.f"
 >
-	<f:FlexibleColumnLayout id="idFlexibleColumnLayout">
+	<f:FlexibleColumnLayout id="idFlexibleColumnLayout" layout="{layoutViewModel>/layout}">
 		<f:beginColumnPages>
 			<mvc:XMLView id="idMasterXMLView" viewName="de.santos.employees.view.Master" type="XML"/>
 		</f:beginColumnPages>
 
 		<f:midColumnPages>
-
+			<mvc:XMLView id="idContainerXMLView" viewName="de.santos.employees.view.Details" type="XML"/>
 		</f:midColumnPages>
 
 	</f:FlexibleColumnLayout>

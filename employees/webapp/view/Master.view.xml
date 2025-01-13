@@ -95,7 +95,7 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem id="idColumnListItem">
+                    <ColumnListItem id="idColumnListItem" type="Navigation" press="onColumnListItemPress">
                         <cells>
                             <ObjectIdentifier id="idObjectIdentifier" title="{employeesModel>EmployeeID}"/>
                             <Text id="idFullNameText" text="{employeesModel>LastName}, {employeesModel>FirstName}"/>

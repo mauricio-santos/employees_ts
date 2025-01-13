@@ -1,0 +1,31 @@
+<mvc:View controllerName="de.santos.employees.controller.Details"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+>
+    <uxap:ObjectPageLayout id="idObjectPageLayout">
+    
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
+                <uxap:expandedHeading>
+                    <Title id="idExpandedHeadingText" text="{i18n>details}"/>
+                </uxap:expandedHeading>
+
+                <uxap:snappedHeading>
+
+                </uxap:snappedHeading>
+
+                <uxap:expandedContent>
+                    <FlexBox id="idFlexBox" fitContainer="true" alignItems="Center">
+                        <Title id="idSnappedHeadingText" text="{i18n>details}"/>
+                    </FlexBox>
+                </uxap:expandedContent>
+
+                <uxap:snappedContent>
+                    
+                </uxap:snappedContent>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+    </uxap:ObjectPageLayout>
+</mvc:View>

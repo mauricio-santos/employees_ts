@@ -11,6 +11,11 @@ import MultiComboBox from "sap/m/MultiComboBox";
 import { ListBase$UpdateFinishedEvent } from "sap/m/ListBase";
 import Title from "sap/m/Title";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
+import { ListItemBase$PressEvent } from "sap/m/ListItemBase";
+import Context from "sap/ui/model/Context";
+import ObjectListItem from "sap/m/ObjectListItem";
+import Router from "sap/m/routing/Router";
+import JSONModel from "sap/ui/model/json/JSONModel";
 
 /**
  * @namespace de.santos.employees.controller
@@ -95,12 +100,26 @@ export default class Master extends BaseController {
         binding.filter(filters); 
     };
 
-    public onEmployeesTableUpdateFinished(event: ListBase$UpdateFinishedEvent) {
+    public onEmployeesTableUpdateFinished(event: ListBase$UpdateFinishedEvent): void {
         const total = event.getParameter("total");
         const headerTitle = this.byId("idEmployeesListTitle") as Title
         const i18n = this.getResourceBundleHelper() as ResourceBundle;
         const text = `${i18n.getText("employeesList")} (${total})`;
         
         headerTitle.setProperty("text", text);
+    };
+
+    public onColumnListItemPress(event: ListItemBase$PressEvent): void {
+        const selectItem = event.getSource() as ObjectListItem;
+        const bindingContext = selectItem.getBindingContext("employeesModel") as Context;
+        const employeeId = parseInt(bindingContext.getProperty("EmployeeID"));
+        const router = this.getRouterHelper() as Router;
+        const modelView = this.getModelHelper("layoutViewModel") as JSONModel;
+        
+        modelView.setProperty("/layout", "TwoColumnsBeginExpanded")
+        
+        router.navTo("RouteDetails", {
+            index: employeeId - 1
+        });
     };
 }

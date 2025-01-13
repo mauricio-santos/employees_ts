@@ -11,6 +11,7 @@ export default class Container extends BaseController{
         this.loadEmployees();
         this.loadCountries();
         this.loadFilters();
+        this.loadLayoutView();
     };
 
     private loadEmployees(): void {
@@ -32,7 +33,12 @@ export default class Container extends BaseController{
         } ;
         const model = new JSONModel(data) as JSONModel;
         this.setModelHelper(model, "filtersModel");
-        
+    };
+
+    private loadLayoutView(): void {
+        const data = {layout: "OneColumn"};
+        const model = new JSONModel(data) as JSONModel;
+        this.setModelHelper(model, "layoutViewModel");
     }
     
 };
