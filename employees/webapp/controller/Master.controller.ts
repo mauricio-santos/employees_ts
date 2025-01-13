@@ -15,7 +15,6 @@ import { ListItemBase$PressEvent } from "sap/m/ListItemBase";
 import Context from "sap/ui/model/Context";
 import ObjectListItem from "sap/m/ObjectListItem";
 import Router from "sap/m/routing/Router";
-import JSONModel from "sap/ui/model/json/JSONModel";
 
 /**
  * @namespace de.santos.employees.controller
@@ -114,9 +113,6 @@ export default class Master extends BaseController {
         const bindingContext = selectItem.getBindingContext("employeesModel") as Context;
         const employeeId = parseInt(bindingContext.getProperty("EmployeeID"));
         const router = this.getRouterHelper() as Router;
-        const modelView = this.getModelHelper("layoutViewModel") as JSONModel;
-        
-        modelView.setProperty("/layout", "TwoColumnsBeginExpanded")
         
         router.navTo("RouteDetails", {
             index: employeeId - 1

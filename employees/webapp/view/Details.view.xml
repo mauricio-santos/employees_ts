@@ -8,7 +8,7 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
                 <uxap:expandedHeading>
-                    <Title id="idExpandedHeadingText" text="{i18n>details}"/>
+                    <Title id="idExpandedHeadingText" text="{i18n>details} {employeesModel>EmployeeID}"/>
                 </uxap:expandedHeading>
 
                 <uxap:snappedHeading>
@@ -17,7 +17,7 @@
 
                 <uxap:expandedContent>
                     <FlexBox id="idFlexBox" fitContainer="true" alignItems="Center">
-                        <Title id="idSnappedHeadingText" text="{i18n>details}"/>
+                        <Title id="idSnappedHeadingText" text="{employeesModel>FirstName} {employeesModel>LastName}"/>
                     </FlexBox>
                 </uxap:expandedContent>
 
