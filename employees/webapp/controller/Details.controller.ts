@@ -2,6 +2,7 @@ import BaseController from "../helpers/BaseController";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import View from "sap/ui/core/mvc/View";
 import { Route$PatternMatchedEvent } from "sap/ui/core/routing/Route";
+import Router from "sap/ui/core/routing/Router";
 
 /**
  * @namespace de.santos.employees.controller
@@ -20,7 +21,7 @@ export default class Details extends BaseController {
         const index = args.index;
         const view = this.getView() as View;
         
-        modelView.setProperty("/layout", "TwoColumnsBeginExpanded");
+        modelView.setProperty("/layout", "TwoColumnsMidExpanded");
 
         view.bindElement({
             path:`/Employees/${index}`,
@@ -34,8 +35,13 @@ export default class Details extends BaseController {
                 }
             }
         });
-
-
-
     };
+
+    public onButtonCloseViewPress() {
+        const modelView = this.getModelHelper("layoutViewModel") as JSONModel;
+        const router = this.getRouterHelper() as Router;
+        
+        modelView.setProperty("/layout", "OneColumn");
+        router.navTo("RouteMaster");
+    }
 };

@@ -8,7 +8,7 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
                 <uxap:expandedHeading>
-                    <Title id="idExpandedHeadingText" text="{i18n>details} {employeesModel>EmployeeID}"/>
+                    <Title id="idExpandedHeadingText" text="{employeesModel>FirstName} {employeesModel>LastName} {employeesModel>EmployeeID}"/>
                 </uxap:expandedHeading>
 
                 <uxap:snappedHeading>
@@ -24,6 +24,10 @@
                 <uxap:snappedContent>
                     
                 </uxap:snappedContent>
+
+                <uxap:actions>
+                    <Button id="idCloseViewButton" icon="sap-icon://decline" type="Emphasized" press="onButtonCloseViewPress"/>
+                </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
