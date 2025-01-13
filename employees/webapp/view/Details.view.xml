@@ -8,21 +8,55 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
                 <uxap:expandedHeading>
-                    <Title id="idExpandedHeadingText" text="{employeesModel>FirstName} {employeesModel>LastName} {employeesModel>EmployeeID}"/>
+                    <Title id="idExpandedTitle" text="{employeesModel>FirstName} {employeesModel>LastName} ({employeesModel>EmployeeID})"/>
                 </uxap:expandedHeading>
 
                 <uxap:snappedHeading>
-
+                    <FlexBox id="idFlexBox" fitContainer="true" alignItems="Center">
+                        <Title id="idSnappedTitle" text="{employeesModel>FirstName} {employeesModel>LastName} ({employeesModel>EmployeeID})"/>
+                    </FlexBox>
                 </uxap:snappedHeading>
 
                 <uxap:expandedContent>
-                    <FlexBox id="idFlexBox" fitContainer="true" alignItems="Center">
-                        <Title id="idSnappedHeadingText" text="{employeesModel>FirstName} {employeesModel>LastName}"/>
-                    </FlexBox>
+                    <HBox id="idExpandedContentHBox" alignItems="Center">
+                        <HBox id="idHBasicContentExpandedHBox" width="100%" justifyContent="SpaceAround">
+                            <VBox id="idCountryExpandedVBox" alignItems="Center" justifyContent="Center" width="6.5rem">
+                                <Label id="idCountryExpandedVBoxLabel" class="boldElement" text="{i18n>country}"/>
+                                <Text id="idCountryExpandedVBoxText" text="{employeesModel>Country}"/>
+                            </VBox>
+
+                            <VBox id="idCityExpandedVBox" alignItems="Center" justifyContent="Center" width="6.5rem">
+                                <Label id="idCityExpandedVboxLabel" class="boldElement" text="{i18n>city}"/>
+                                <Text id="idCityExpandedVBoxText" text="{employeesModel>City}"/>
+                            </VBox>
+
+                            <VBox id="idPostalCodeExpandedVBox" alignItems="Center" justifyContent="Center" width="6.5rem">
+                                <Label id="idPostalCodeExpandedVBoxLabel" class="boldElement" text="{i18n>postalCode}"/>
+                                <Text id="idPostalCodeExpandedVBoxText" text="{employeesModel>PostalCode}"/>
+                            </VBox>
+                        </HBox>
+                    </HBox>
                 </uxap:expandedContent>
 
                 <uxap:snappedContent>
-                    
+                    <HBox id="idSnappedContentHBox" alignItems="Center">
+                        <HBox id="idSnappedHBox" width="100%" justifyContent="SpaceAround">
+                            <VBox id="idSnappedCountryVBox" alignItems="Center" justifyContent="Center" width="6.5rem">
+                                <Label id="idCountrySnappedVBoxLabel" class="boldElement" text="{i18n>country}"/>
+                                <Text id="idCountrySnappedVBoxText" text="{employeesModel>Country}"/>
+                            </VBox>
+
+                            <VBox id="idCitySnappedVBox" alignItems="Center" justifyContent="Center" width="6.5rem">
+                                <Label id="idCitySnappedVboxLabel" class="boldElement" text="{i18n>city}"/>
+                                <Text id="idCitySnappedVBoxText" text="{employeesModel>City}"/>
+                            </VBox>
+
+                            <VBox id="idPostalCodeSnappedVBox" alignItems="Center" justifyContent="Center" width="6.5rem">
+                                <Label id="idPostalCodeSnappedVBoxLabel" class="boldElement" text="{i18n>postalCode}"/>
+                                <Text id="idPostalCodeSnappedVBoxText" text="{employeesModel>PostalCode}"/>
+                            </VBox>
+                        </HBox>
+                    </HBox>
                 </uxap:snappedContent>
 
                 <uxap:actions>
