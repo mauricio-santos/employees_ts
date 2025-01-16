@@ -60,10 +60,22 @@
                 </uxap:snappedContent>
 
                 <uxap:actions>
-                    <Button id="idCloseViewButton" icon="sap-icon://decline" type="Emphasized" press="onButtonCloseViewPress"/>
+                    <Button id="idCreateButton" text="{i18n>create}" type="Emphasized" press="onCreateButtonPress"/>
+                    <Button id="idCloseViewButton" icon="sap-icon://decline" type="Reject" press="onButtonCloseViewPress"/>
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
+
+        <!-- <uxap:headerContent>
+        </uxap:headerContent> -->
+
+        <uxap:sections>
+            <uxap:ObjectPageSection id="idObjectPageSection" title="{i18n>incidence}">
+                <uxap:ObjectPageSubSection id="idObjectPageSubSection">
+                    <Panel id="idTableIncidencePanel"/>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
 
     </uxap:ObjectPageLayout>
 </mvc:View>

@@ -43,5 +43,9 @@ export default class Details extends BaseController {
         
         modelView.setProperty("/layout", "OneColumn");
         router.navTo("RouteMaster");
-    }
+    };
+
+    public onCreateButtonPress() {
+
+    };
 };
