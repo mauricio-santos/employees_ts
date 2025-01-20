@@ -2,6 +2,7 @@
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
     xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
 >
     <uxap:ObjectPageLayout id="idObjectPageLayout">
     
@@ -73,6 +74,12 @@
             <uxap:ObjectPageSection id="idObjectPageSection" title="{i18n>incidence}">
                 <uxap:ObjectPageSubSection id="idObjectPageSubSection">
                     <Panel id="idTableIncidencePanel"/>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection id="idOrderObjectPageSection" title="{i18n>orders}">
+                <uxap:ObjectPageSubSection id="idOrderObjectPageSubSection">
+                    <core:Fragment fragmentName="de.santos.employees.fragments.OrdersTableFrag" type="XML"/>
                 </uxap:ObjectPageSubSection>
             </uxap:ObjectPageSection>
         </uxap:sections>

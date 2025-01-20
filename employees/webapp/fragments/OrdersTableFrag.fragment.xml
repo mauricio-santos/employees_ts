@@ -1,0 +1,30 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Table id="idOrdersTable" items="{employeesModel>Orders}">
+        <columns>
+            <Column id="idOrderIdColumn">
+                <Label id="idOrderIDLabel" text="{i18n>orderId}"/>
+            </Column>
+
+            <Column id="idFreightColumn">
+                <Label id="idFreightLabel" text="{i18n>freight}"/>
+            </Column>
+
+            <Column id="idshipAddresseColumn">
+                <Label id="idShipAddresseLabel" text="{i18n>shipAddresse}"/>
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem id="idOrdersColumnListItem">
+                <cells>
+                    <ObjectIdentifier id="idOrderIDObjectIdentifier" text="{employeesModel>OrderID}"/>
+                    <Text id="idFreightText" text="{employeesModel>Freight}"/>
+                    <Text id="idShipAddressText" text="{employeesModel>ShipAddress}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</c:FragmentDefinition>
