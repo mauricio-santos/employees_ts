@@ -6,10 +6,37 @@
         <headerToolbar>
             <Toolbar id="idIncidenceFragToolbar">
                 <Title id="idIncidenceTitle" text="{formModel>Index}. {i18n>incidence}"/>
+                <c:Icon id="idIcon" 
+                    src="{= ${formModel>Type} === '1' ? 'sap-icon://accept' :
+                            ${formModel>Type} === '2' ? 'sap-icon://pending' :
+                            ${formModel>Type} === '3' ? 'sap-icon://error' : 'sap-icon://create'
+                         }"
+                />
             </Toolbar>
         </headerToolbar>
 
-        <content>           
+        <content>
+            <HBox id="idInidenceHBox">
+                <VBox id="idIncideceFragVBox" class="sapUiSmallMarginEnd">
+                    <Label id="idDateLabel" text="{i18n>date}"/>
+                    <DatePicker id="idDatePicker"/>
+                </VBox>
+
+                <VBox id="idReasonVBox" class="sapUiSmallMarginEnd">
+                    <Label id="idReasonLabel" text="{i18n>reason}"/>
+                    <Input id="idReasonInput" value="{formModel>Reason}"/>
+                </VBox>
+
+                <VBox id="idTypeVBox" class="sapUiSmallMarginEnd">
+                    <Label id="idTypeLabel" text="{i18n>type}"/>
+                    <Select id="idTypesSelect" selectedKey="{formModel>Type}">
+                        <c:Item id="idSelectAnItemItem" key="0" text="{i18n>typeEmpty}"/>
+                        <c:Item id="idCorrectItem" key="1" text="{i18n>typeCorrect}"/>
+                        <c:Item id="idPendingItem" key="2" text="{i18n>typePending}"/>
+                        <c:Item id="idErrorItem" key="3" text="{i18n>typeError}"/>
+                    </Select>
+                </VBox>
+            </HBox>           
             
         </content>
     </Panel>
