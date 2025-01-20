@@ -3,12 +3,15 @@ import JSONModel from "sap/ui/model/json/JSONModel";
 import View from "sap/ui/core/mvc/View";
 import { Route$PatternMatchedEvent } from "sap/ui/core/routing/Route";
 import Router from "sap/ui/core/routing/Router";
+import Panel from "sap/m/Panel";
 
 /**
  * @namespace de.santos.employees.controller
  */
 
 export default class Details extends BaseController {
+
+    private fragmentPanel: Panel;
 
     public onInit(): void {
         const router = this.getRouterHelper();
@@ -20,6 +23,8 @@ export default class Details extends BaseController {
         const args = event.getParameter("arguments") as any;
         const index = args.index;
         const view = this.getView() as View;
+
+        this.removeAllPanelContent()
         
         modelView.setProperty("/layout", "TwoColumnsMidExpanded");
 
@@ -37,7 +42,7 @@ export default class Details extends BaseController {
         });
     };
 
-    public onButtonCloseViewPress() {
+    public onButtonCloseViewPress(): void {
         const modelView = this.getModelHelper("layoutViewModel") as JSONModel;
         const router = this.getRouterHelper() as Router;
         
@@ -45,7 +50,19 @@ export default class Details extends BaseController {
         router.navTo("RouteMaster");
     };
 
-    public onCreateButtonPress() {
+    public removeAllPanelContent(): void {
+        const panel = this.byId("idTableIncidencePanel") as Panel;
+        panel.removeAllContent();
+    };
 
+    public async onCreateButtonPress(): Promise<void> {
+        const panel = this.byId("idTableIncidencePanel") as Panel;
+
+        this.fragmentPanel = await <Promise<Panel>> this.loadFragment({
+            name: "de.santos.employees.fragments.NewIncidenceFrag",
+            id: Date.now().toString() //unique IDs
+        });       
+
+        panel.addContent(this.fragmentPanel);
     };
 };

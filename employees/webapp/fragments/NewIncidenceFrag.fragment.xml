@@ -1,0 +1,16 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Panel id="idIncidenceFragPanel">
+        <headerToolbar>
+            <Toolbar id="idIncidenceFragToolbar">
+            
+            </Toolbar>
+        </headerToolbar>
+
+        <content>
+            
+        </content>
+    </Panel>
+</c:FragmentDefinition>
