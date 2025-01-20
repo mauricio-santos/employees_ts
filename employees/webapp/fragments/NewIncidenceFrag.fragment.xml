@@ -5,11 +5,11 @@
     <Panel id="idIncidenceFragPanel">
         <headerToolbar>
             <Toolbar id="idIncidenceFragToolbar">
-            
+                <Title id="idIncidenceTitle" text="{formModel>Index}. {i18n>incidence}"/>
             </Toolbar>
         </headerToolbar>
 
-        <content>
+        <content>           
             
         </content>
     </Panel>

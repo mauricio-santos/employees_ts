@@ -13,9 +13,16 @@ export default class Details extends BaseController {
 
     private fragmentPanel: Panel;
 
+    private loadFormModel() {
+        const model = new JSONModel([]) as JSONModel;
+        this.getView()?.setModel(model, "formModel");
+    }
+
     public onInit(): void {
         const router = this.getRouterHelper();
         router.getRoute("RouteDetails")?.attachPatternMatched(this.onObjectMatched.bind(this));
+
+        this.loadFormModel();
     };
 
     private onObjectMatched(event : Route$PatternMatchedEvent): void {
@@ -61,8 +68,20 @@ export default class Details extends BaseController {
         this.fragmentPanel = await <Promise<Panel>> this.loadFragment({
             name: "de.santos.employees.fragments.NewIncidenceFrag",
             id: Date.now().toString() //unique IDs
-        });       
+        });
+        
+        const formModel = this.getModelHelper("formModel") as JSONModel;
+        const data = formModel.getData() as Array<Object>;
+        const index = data.length;
+        
+        data.push({Index: index + 1});
+        formModel.refresh();
 
+        this.fragmentPanel.bindElement({
+            path: "formModel>/" + index,
+            model: "formModel"
+        });
+        
         panel.addContent(this.fragmentPanel);
     };
 };
