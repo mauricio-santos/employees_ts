@@ -1,7 +1,7 @@
 {
     "Countries": [
       { "code": "ES", "country": "España" },
-      { "code": "US", "country": "Estados Unidos" },
+      { "code": "USA", "country": "Estados Unidos" },
       { "code": "UK", "country": "Reino Unido" },
       { "code": "MX", "country": "México" },
       { "code": "KR", "country": "Corea del Sur" },

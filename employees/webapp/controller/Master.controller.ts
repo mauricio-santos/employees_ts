@@ -12,9 +12,9 @@ import { ListBase$UpdateFinishedEvent } from "sap/m/ListBase";
 import Title from "sap/m/Title";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import { ListItemBase$PressEvent } from "sap/m/ListItemBase";
-import Context from "sap/ui/model/Context";
 import ObjectListItem from "sap/m/ObjectListItem";
 import Router from "sap/m/routing/Router";
+import Context from "sap/ui/model/odata/v2/Context";
 
 /**
  * @namespace de.santos.employees.controller
@@ -110,12 +110,12 @@ export default class Master extends BaseController {
 
     public onColumnListItemPress(event: ListItemBase$PressEvent): void {
         const selectItem = event.getSource() as ObjectListItem;
-        const bindingContext = selectItem.getBindingContext("employeesModel") as Context;
-        const employeeId = parseInt(bindingContext.getProperty("EmployeeID"));
+        const bindingContext = selectItem.getBindingContext("northwindModel") as Context;
+        const employeeId = bindingContext.getProperty("EmployeeID");
         const router = this.getRouterHelper() as Router;
         
         router.navTo("RouteDetails", {
-            index: employeeId - 1
+            index: employeeId
         });
     };
 }

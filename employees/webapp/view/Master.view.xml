@@ -62,7 +62,7 @@
             
         <f:content>
             <Table id="idEmployeesTable" 
-                items="{employeesModel>/Employees}" 
+                items="{northwindModel>/Employees}" 
                 growing="true"
                 growingScrollToLoad="true"
                 updateFinished="onEmployeesTableUpdateFinished"
@@ -97,11 +97,11 @@
                 <items>
                     <ColumnListItem id="idColumnListItem" type="Navigation" press="onColumnListItemPress">
                         <cells>
-                            <ObjectIdentifier id="idObjectIdentifier" title="{employeesModel>EmployeeID}"/>
-                            <Text id="idFullNameText" text="{employeesModel>LastName}, {employeesModel>FirstName}"/>
-                            <Text id="idCountryText" text="{employeesModel>Country}"/>
-                            <Text id="idCityText" text="{employeesModel>City}"/>
-                            <Text id="idPostalCodeText" text="{employeesModel>PostalCode}"/>
+                            <ObjectIdentifier id="idObjectIdentifier" title="{northwindModel>EmployeeID}"/>
+                            <Text id="idFullNameText" text="{northwindModel>LastName}, {northwindModel>FirstName}"/>
+                            <Text id="idCountryText" text="{northwindModel>Country}"/>
+                            <Text id="idCityText" text="{northwindModel>City}"/>
+                            <Text id="idPostalCodeText" text="{northwindModel>PostalCode}"/>
                         </cells>
                     </ColumnListItem>
                 </items>

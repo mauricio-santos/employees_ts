@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:c="sap.ui.core"
 >
-    <Table id="idOrdersTable" items="{employeesModel>Orders}">
+    <Table id="idOrdersTable" items="{northwindModel>Orders}">
         <columns>
             <Column id="idOrderIdColumn">
                 <Label id="idOrderIDLabel" text="{i18n>orderId}"/>
@@ -20,9 +20,9 @@
         <items>
             <ColumnListItem id="idOrdersColumnListItem">
                 <cells>
-                    <ObjectIdentifier id="idOrderIDObjectIdentifier" text="{employeesModel>OrderID}"/>
-                    <Text id="idFreightText" text="{employeesModel>Freight}"/>
-                    <Text id="idShipAddressText" text="{employeesModel>ShipAddress}"/>
+                    <ObjectIdentifier id="idOrderIDObjectIdentifier" text="{northwindModel>OrderID}"/>
+                    <Text id="idFreightText" text="{northwindModel>Freight}"/>
+                    <Text id="idShipAddressText" text="{northwindModel>ShipAddress}"/>
                 </cells>
             </ColumnListItem>
         </items>

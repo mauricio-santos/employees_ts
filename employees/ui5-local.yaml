@@ -37,6 +37,11 @@ server:
       afterMiddleware: compression
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /V2
+            url: https://services.odata.org/
+            destination: Northwind
+            authenticationType: NoAuthentication
 builder:
   customTasks:
     - name: ui5-tooling-transpile-task

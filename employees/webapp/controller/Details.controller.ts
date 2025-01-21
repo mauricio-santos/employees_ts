@@ -36,14 +36,14 @@ export default class Details extends BaseController {
         modelView.setProperty("/layout", "TwoColumnsMidExpanded");
 
         view.bindElement({
-            path:`/Employees/${index}`,
-            model: 'employeesModel',
+            path:`/Employees(${index})`,
+            model: 'northwindModel',
             events: {
                 dataRequested: function() {
-                    console.log("dataRequested");
+                    // console.log("dataRequested");
                 },
                 dataReceived: function() {
-                    console.log("dataReceived");
+                    // console.log("dataReceived");
                 }
             }
         });
