@@ -50,13 +50,15 @@ export default class Details extends BaseController {
             path:`/Employees(${index})`,
             model: 'northwindModel',
             events: {
+                change: function() {
+                    // Read incidence when the model is changed
+                    _this.readIncidences();
+                },
                 dataRequested: function() {
                     // console.log("dataRequested");
                 },
                 dataReceived: function() {
                     // console.log("dataReceived");
-                    //Read Incidences
-                    _this.readIncidences();
                 }
             }
         });
