@@ -7,6 +7,10 @@ import Panel from "sap/m/Panel";
 import { Button$PressEvent } from "sap/m/Button";
 import Context from "sap/ui/model/odata/v2/Context";
 import Utils from "../utils/Utils";
+import Filter from "sap/ui/model/Filter";
+import FilterOperator from "sap/ui/model/FilterOperator";
+import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
+
 
 /**
  * @namespace de.santos.employees.controller
@@ -33,6 +37,7 @@ export default class Details extends BaseController {
         const args = event.getParameter("arguments") as any;
         const index = args.index;
         const view = this.getView() as View;
+        const _this = this;
 
         this.removeAllPanelContent();
         
@@ -47,6 +52,8 @@ export default class Details extends BaseController {
                 },
                 dataReceived: function() {
                     // console.log("dataReceived");
+                    //Read Incidences
+                    _this.readIncidences();
                 }
             }
         });
@@ -106,5 +113,57 @@ export default class Details extends BaseController {
         };
         const model = new JSONModel(data);
         utils.crud("create", model) ;
+    };
+
+    private async readIncidences(): Promise<void> {
+        const utils = new Utils(this);
+        const sapId = utils.getEmail();
+        const northwindModel = this.getView()?.getBindingContext("northwindModel") as Context;
+        const employeeId = northwindModel.getProperty("EmployeeID");
+
+        const body = {
+            url: "/IncidentsSet",
+            filters: [
+                new Filter("SapId", FilterOperator.EQ, sapId),
+                new Filter("EmployeeId", FilterOperator.EQ, employeeId)
+            ]
+        }
+        const data = new JSONModel(body);
+        const result = await utils.read(data); //Returns all data, if it exists 
+        
+        this.showIncidents(result);
+    };
+
+    private async showIncidents(result: void | ODataListBinding): Promise<void> {      
+        const objectResult = result as any;
+        const arrayResult = objectResult.results;
+        const formModel = this.getModelHelper("formModel") as JSONModel;
+
+        // if (arrayResult.length == 0) {
+        //     console.log("Não há incidências");
+        //     return;
+        // }
+
+        //Reset the results
+        formModel.setData(arrayResult);
+        
+        //Maping
+        arrayResult.forEach(async (incidence: any, index: number) => {
+            const panel = this.byId("idTableIncidencePanel") as Panel;
+
+            const newIncidence = await <Promise<Panel>> this.loadFragment({
+                name: "de.santos.employees.fragments.NewIncidenceFrag",
+                id: "fragment-" + Math.random().toString(5)
+            });
+
+            //Indexing incidences
+            incidence.Index = index + 1;
+
+            //Binding fragment
+            newIncidence.bindElement("formModel>/" + index);
+        
+            //Add fragment on View
+            panel.addContent(newIncidence);
+        });
     };
 };

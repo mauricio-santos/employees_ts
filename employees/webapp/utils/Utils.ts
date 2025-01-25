@@ -5,9 +5,10 @@ import ResourceModel from "sap/ui/model/resource/ResourceModel";
 import UIComponent from "sap/ui/core/UIComponent";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import MessageBox from "sap/m/MessageBox";
+import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
 
 /**
- * @namespace de.santos.employees.controller
+ * @namespace de.santos.employees.utils.controller
  */
 export default class Utils {
 
@@ -58,5 +59,26 @@ export default class Utils {
                 console.log(e);
             }
         }) 
+    };
+
+    public async read(data: JSONModel): Promise<void  | ODataListBinding> {
+        const model = this.model;
+        const url = data.getProperty("/url");
+        const filters = data.getProperty("/filters");
+        const i18n = this.resourceBundle;
+
+        return new Promise((resolve, reject) => {
+            model.read(url, {
+                filters: filters,
+                success: function(data: ODataListBinding) {
+                    // console.log(data);
+                    resolve(data);
+                },
+                error: function() {
+                    MessageBox.error(i18n.getText("error") || "no text defined");
+                    reject();
+                }
+            });
+        });
     };
 }
