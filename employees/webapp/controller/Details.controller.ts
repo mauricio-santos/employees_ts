@@ -4,6 +4,9 @@ import View from "sap/ui/core/mvc/View";
 import { Route$PatternMatchedEvent } from "sap/ui/core/routing/Route";
 import Router from "sap/ui/core/routing/Router";
 import Panel from "sap/m/Panel";
+import { Button$PressEvent } from "sap/m/Button";
+import Context from "sap/ui/model/odata/v2/Context";
+import Utils from "../utils/Utils";
 
 /**
  * @namespace de.santos.employees.controller
@@ -31,7 +34,7 @@ export default class Details extends BaseController {
         const index = args.index;
         const view = this.getView() as View;
 
-        this.removeAllPanelContent()
+        this.removeAllPanelContent();
         
         modelView.setProperty("/layout", "TwoColumnsMidExpanded");
 
@@ -83,5 +86,25 @@ export default class Details extends BaseController {
         });
         
         panel.addContent(this.fragmentPanel);
+    };
+
+    public async onButtonSaveIncidencePress(event: Button$PressEvent): Promise<void> {
+        const fragmentPanel = event.getSource()?.getParent()?.getParent() as Panel;
+        const form = fragmentPanel.getBindingContext("formModel") as Context;
+        const northwind = this.getView()?.getBindingContext("northwindModel") as Context;
+        const utils = new Utils(this);
+
+        const data = {
+            url: "/IncidentsSet",
+            data: {
+                SapId: utils.getEmail(),
+                EmployeeId: northwind.getProperty("EmployeeID").toString(),
+                CreationDate: form.getProperty("CreationDate"),
+                Type: form.getProperty("Type"),
+                Reason: form.getProperty("Reason")
+            }
+        };
+        const model = new JSONModel(data);
+        utils.crud("create", model) ;
     };
 };

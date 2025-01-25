@@ -12,6 +12,10 @@
                             ${formModel>Type} === '3' ? 'sap-icon://error' : 'sap-icon://create'
                          }"
                 />
+                <ToolbarSpacer id="idToolbarSpacer"/>
+                <Button id="idSaveButton" icon="sap-icon://save" type="Emphasized" press="onButtonSaveIncidencePress"/>
+                <Button id="idRemoveButton" icon="sap-icon://delete" type="Reject" press="onButtonRemoveIncidencePress"/>
+
             </Toolbar>
         </headerToolbar>
 
@@ -19,7 +23,7 @@
             <HBox id="idInidenceHBox">
                 <VBox id="idIncideceFragVBox" class="sapUiSmallMarginEnd">
                     <Label id="idDateLabel" text="{i18n>date}"/>
-                    <DatePicker id="idDatePicker"/>
+                    <DatePicker id="idDatePicker" dateValue="{formModel>CreationDate}"/>
                 </VBox>
 
                 <VBox id="idReasonVBox" class="sapUiSmallMarginEnd">
