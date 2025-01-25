@@ -26,7 +26,7 @@ export default class Utils {
         return "mauricio.vieira@email.de"
     };
 
-    public async crud(action: string, model?: JSONModel): Promise<void> {
+    public async crud(action: string, model: JSONModel): Promise<void> {
         const resourceBundle = this.resourceBundle;
         const _this = this;
 
@@ -38,16 +38,16 @@ export default class Utils {
                     switch(action) {
                         case 'create': _this.create(model); break;
                         case 'update': _this.update(model); break;
-                        case 'delete': break;
+                        case 'delete': _this.delete(model); break;
                     }
                 }
             }
         });
     };
 
-    private async create(model?: JSONModel): Promise<void> {
-        const url = model?.getProperty("/url");
-        const data = model?.getProperty("/data");
+    private async create(model: JSONModel): Promise<void> {
+        const url = model.getProperty("/url");
+        const data = model.getProperty("/data");
         const i18n = this.resourceBundle;
 
         this.model.create(url, data, {
@@ -82,7 +82,7 @@ export default class Utils {
         });
     };
 
-     private async update(model: JSONModel): Promise<void> {
+    private async update(model: JSONModel): Promise<void> {
         const url = model.getProperty("/url");
         const data = model.getProperty("/data");
         const i18n = this.resourceBundle;
@@ -97,4 +97,19 @@ export default class Utils {
             }
         }) 
     };
+
+    private async delete(model: JSONModel): Promise<void> {
+        const url = model.getProperty("/url");
+        const i18n = this.resourceBundle;
+        
+        this.model.remove(url, {
+            success: function() {
+                MessageBox.success(i18n.getText("successDelete") || "no text defined");
+            },
+            error: function(e: any) {
+                MessageBox.error(i18n.getText("errorDelete") || "no text defined");
+                console.log(e);
+            }
+        }) 
+    }
 }

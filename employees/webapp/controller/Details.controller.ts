@@ -182,7 +182,7 @@ export default class Details extends BaseController {
 
             const newIncidence = await <Promise<Panel>> this.loadFragment({
                 name: "de.santos.employees.fragments.NewIncidenceFrag",
-                id: "fragment-" + Math.random().toString(5)
+                id: "incidenceFrag-" + Math.floor(10000 + Math.random() * 90000)
             });
 
             //Indexing incidences
@@ -213,4 +213,21 @@ export default class Details extends BaseController {
         const objectContext = context.getObject() as any;
         objectContext.TypeX = true;
     };
+
+    public async onButtonRemoveIncidencePress(event: Button$PressEvent): Promise<void> {
+        const panel = event.getSource().getParent()?.getParent() as Panel;
+        const utils = new Utils(this);
+        const form = panel.getBindingContext( "formModel") as Context;
+        const northwind = this.getView()?.getBindingContext("northwindModel") as Context;
+        const incidenceId = form.getProperty("IncidenceId");
+        const sapId = utils.getEmail();
+        const employeeId = northwind.getProperty("EmployeeID");
+
+        const object = {
+            url: `/IncidentsSet(IncidenceId='${incidenceId}',SapId='${sapId}',EmployeeId='${employeeId}')`
+        }
+        const model = new JSONModel(object);
+        await utils.crud("delete", model);
+        
+    }
 };
