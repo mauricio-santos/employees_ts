@@ -10,6 +10,9 @@ import Utils from "../utils/Utils";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
+import { DatePicker$ChangeEvent } from "sap/m/DatePicker";
+import { Input$LiveChangeEvent } from "sap/m/Input";
+import { Select$ChangeEvent } from "sap/m/Select";
 
 
 /**
@@ -100,19 +103,45 @@ export default class Details extends BaseController {
         const form = fragmentPanel.getBindingContext("formModel") as Context;
         const northwind = this.getView()?.getBindingContext("northwindModel") as Context;
         const utils = new Utils(this);
+        const incidenceIsSet = form.getProperty("IncidenceId");
 
-        const data = {
-            url: "/IncidentsSet",
-            data: {
-                SapId: utils.getEmail(),
-                EmployeeId: northwind.getProperty("EmployeeID").toString(),
-                CreationDate: form.getProperty("CreationDate"),
-                Type: form.getProperty("Type"),
-                Reason: form.getProperty("Reason")
-            }
-        };
-        const model = new JSONModel(data);
-        utils.crud("create", model) ;
+        if (!incidenceIsSet){
+            //CREATE
+            const data = {
+                url: "/IncidentsSet",
+                data: {
+                    SapId: utils.getEmail(),
+                    EmployeeId: northwind.getProperty("EmployeeID").toString(),
+                    CreationDate: form.getProperty("CreationDate"),
+                    Type: form.getProperty("Type"),
+                    Reason: form.getProperty("Reason")
+                }
+            };
+            const model = new JSONModel(data);
+            await utils.crud("create", model);
+        }else{
+            //UPDATE
+            const incidenceId = form.getProperty("IncidenceId");
+            const sapId = utils.getEmail();
+            const employeeId = form.getProperty("EmployeeId")
+            const url = `/IncidentsSet(IncidenceId='${incidenceId}',SapId='${sapId}',EmployeeId='${employeeId}')`;
+
+            const data = {
+                url,
+                data: {
+                    SapId: sapId,
+                    EmployeeId: employeeId,
+                    CreationDate: form.getProperty("CreationDate"),
+                    CreationDateX: form.getProperty("CreationDateX"),
+                    Type: form.getProperty("Type"),
+                    TypeX: form.getProperty("TypeX"),
+                    Reason: form.getProperty("Reason"),
+                    ReasonX: form.getProperty("ReasonX")
+                }
+            };
+            const model = new JSONModel(data);
+            await utils.crud("update", model);
+        }
     };
 
     private async readIncidences(): Promise<void> {
@@ -165,5 +194,23 @@ export default class Details extends BaseController {
             //Add fragment on View
             panel.addContent(newIncidence);
         });
+    };
+
+    public onDatePickerChange(event: DatePicker$ChangeEvent): void {
+        const context = event.getSource().getBindingContext("formModel") as Context;
+        const objectContext = context.getObject() as any;
+        objectContext.CreationDateX = true;
+    };
+
+    public onReasonInputChange(event: Input$LiveChangeEvent): void {
+        const context = event.getSource().getBindingContext("formModel") as Context;
+        const objectContext = context.getObject() as any;
+        objectContext.ReasonX = true;
+    };
+
+    public onSelectChange(event: Select$ChangeEvent): void {
+        const context = event.getSource().getBindingContext("formModel") as Context;
+        const objectContext = context.getObject() as any;
+        objectContext.TypeX = true;
     };
 };

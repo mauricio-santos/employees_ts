@@ -36,8 +36,8 @@ export default class Utils {
             onClose: function(selectedAction: string) {
                 if (selectedAction === MessageBox.Action.OK){
                     switch(action) {
-                        case 'create': _this.create(model);
-                        case 'update': break;
+                        case 'create': _this.create(model); break;
+                        case 'update': _this.update(model); break;
                         case 'delete': break;
                     }
                 }
@@ -80,5 +80,21 @@ export default class Utils {
                 }
             });
         });
+    };
+
+     private async update(model: JSONModel): Promise<void> {
+        const url = model.getProperty("/url");
+        const data = model.getProperty("/data");
+        const i18n = this.resourceBundle;
+        
+        this.model.update(url, data, {
+            success: function() {
+                MessageBox.success(i18n.getText("successUpdate") || "no text defined");
+            },
+            error: function(e: any) {
+                MessageBox.error(i18n.getText("errorUpdate") || "no text defined");
+                console.log(e);
+            }
+        }) 
     };
 }

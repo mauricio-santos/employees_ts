@@ -23,17 +23,17 @@
             <HBox id="idInidenceHBox">
                 <VBox id="idIncideceFragVBox" class="sapUiSmallMarginEnd">
                     <Label id="idDateLabel" text="{i18n>date}"/>
-                    <DatePicker id="idDatePicker" dateValue="{formModel>CreationDate}"/>
+                    <DatePicker id="idDatePicker" dateValue="{formModel>CreationDate}" change="onDatePickerChange"/>
                 </VBox>
 
                 <VBox id="idReasonVBox" class="sapUiSmallMarginEnd">
                     <Label id="idReasonLabel" text="{i18n>reason}"/>
-                    <Input id="idReasonInput" value="{formModel>Reason}"/>
+                    <Input id="idReasonInput" value="{formModel>Reason}" change="onReasonInputChange"/>
                 </VBox>
 
                 <VBox id="idTypeVBox" class="sapUiSmallMarginEnd">
                     <Label id="idTypeLabel" text="{i18n>type}"/>
-                    <Select id="idTypesSelect" selectedKey="{formModel>Type}">
+                    <Select id="idTypesSelect" selectedKey="{formModel>Type}" change="onSelectChange">
                         <c:Item id="idSelectAnItemItem" key="0" text="{i18n>typeEmpty}"/>
                         <c:Item id="idCorrectItem" key="1" text="{i18n>typeCorrect}"/>
                         <c:Item id="idPendingItem" key="2" text="{i18n>typePending}"/>
