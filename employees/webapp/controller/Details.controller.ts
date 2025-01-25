@@ -173,6 +173,7 @@ export default class Details extends BaseController {
         const objectResult = result as any;
         const arrayResult = objectResult.results;
         const formModel = this.getModelHelper("formModel") as JSONModel;
+        const panel = this.byId("idTableIncidencePanel") as Panel;
 
         // if (arrayResult.length == 0) {
         //     console.log("Não há incidências");
@@ -184,10 +185,13 @@ export default class Details extends BaseController {
 
         //Reset the results
         formModel.setData(arrayResult);
-        
-        //Maping
-        arrayResult.forEach(async (incidence: any, index: number) => {
-            const panel = this.byId("idTableIncidencePanel") as Panel;
+
+        // Creating fragment for each incidence and adding to the panel
+        for (const [index, incidence] of arrayResult.entries()) {
+            /*Loop for ... of is used because it allows you to work with Await sequentially. That is, the next item will only be processed after the current one finishes. 
+            Foreach would occur in parallel and the index would not obey the 
+            arrayResult.entries() - returns an array with key and value*/
+            
             const newIncidence = await <Promise<Panel>> this.loadFragment({
                 name: "de.santos.employees.fragments.NewIncidenceFrag",
                 id: "incidenceFrag-" + Math.floor(10000 + Math.random() * 90000)
@@ -198,10 +202,10 @@ export default class Details extends BaseController {
 
             //Binding fragment
             newIncidence.bindElement("formModel>/" + index);
-        
+            
             //Add fragment on View
             panel.addContent(newIncidence);
-        });
+        };
     };
 
     public onDatePickerChange(event: DatePicker$ChangeEvent): void {
