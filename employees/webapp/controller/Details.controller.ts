@@ -104,21 +104,24 @@ export default class Details extends BaseController {
         const northwind = this.getView()?.getBindingContext("northwindModel") as Context;
         const utils = new Utils(this);
         const incidenceIsSet = form.getProperty("IncidenceId");
+        const sapId = utils.getEmail();
+        const employeeId = northwind.getProperty("EmployeeID").toString();
 
         if (!incidenceIsSet){
             //CREATE
             const data = {
                 url: "/IncidentsSet",
                 data: {
-                    SapId: utils.getEmail(),
-                    EmployeeId: northwind.getProperty("EmployeeID").toString(),
+                    SapId: sapId,
+                    EmployeeId: employeeId,
                     CreationDate: form.getProperty("CreationDate"),
                     Type: form.getProperty("Type"),
                     Reason: form.getProperty("Reason")
                 }
             };
             const model = new JSONModel(data);
-            await utils.crud("create", model);
+            const results = await utils.crud("create", model);
+            this.showIncidents(results)
         }else{
             //UPDATE
             const incidenceId = form.getProperty("IncidenceId");
@@ -140,7 +143,8 @@ export default class Details extends BaseController {
                 }
             };
             const model = new JSONModel(data);
-            await utils.crud("update", model);
+            const results = await utils.crud("update", model);
+            this.showIncidents(results);
         }
     };
 
@@ -173,13 +177,15 @@ export default class Details extends BaseController {
         //     return;
         // }
 
+        //Removing previous incidences
+        this.removeAllPanelContent();
+
         //Reset the results
         formModel.setData(arrayResult);
         
         //Maping
         arrayResult.forEach(async (incidence: any, index: number) => {
             const panel = this.byId("idTableIncidencePanel") as Panel;
-
             const newIncidence = await <Promise<Panel>> this.loadFragment({
                 name: "de.santos.employees.fragments.NewIncidenceFrag",
                 id: "incidenceFrag-" + Math.floor(10000 + Math.random() * 90000)
@@ -221,13 +227,18 @@ export default class Details extends BaseController {
         const northwind = this.getView()?.getBindingContext("northwindModel") as Context;
         const incidenceId = form.getProperty("IncidenceId");
         const sapId = utils.getEmail();
-        const employeeId = northwind.getProperty("EmployeeID");
+        const employeeId = northwind.getProperty("EmployeeID").toString();
 
         const object = {
+            data: { //required for read
+                SapId: sapId,
+                EmployeeId: employeeId
+            },
             url: `/IncidentsSet(IncidenceId='${incidenceId}',SapId='${sapId}',EmployeeId='${employeeId}')`
         }
         const model = new JSONModel(object);
-        await utils.crud("delete", model);
+        const results = await utils.crud("delete", model);
+        this.showIncidents(results);
         
     }
 };
