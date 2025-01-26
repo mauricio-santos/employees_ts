@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:c="sap.ui.core"
 >
-    <Table id="idOrdersTable" items="{northwindModel>Orders}">
+    <Table id="idOrdersTable" items="{northwindModel>Orders}" growing="true" growingScrollToLoad="true">
         <columns>
             <Column id="idOrderIdColumn">
                 <Label id="idOrderIDLabel" text="{i18n>orderId}"/>
@@ -18,7 +18,7 @@
         </columns>
 
         <items>
-            <ColumnListItem id="idOrdersColumnListItem">
+            <ColumnListItem id="idOrdersColumnListItem" type="Navigation" press="onColumnListItemOrdersPress">
                 <cells>
                     <ObjectIdentifier id="idOrderIDObjectIdentifier" text="{northwindModel>OrderID}"/>
                     <Text id="idFreightText" text="{northwindModel>Freight}"/>

@@ -5,12 +5,16 @@
 >
 	<f:FlexibleColumnLayout id="idFlexibleColumnLayout" layout="{layoutViewModel>/layout}">
 		<f:beginColumnPages>
-			<mvc:XMLView id="idMasterXMLView" viewName="de.santos.employees.view.Master" type="XML"/>
+			<mvc:XMLView id="idContainerMasterXMLView" viewName="de.santos.employees.view.Master" type="XML"/>
 		</f:beginColumnPages>
 
 		<f:midColumnPages>
-			<mvc:XMLView id="idContainerXMLView" viewName="de.santos.employees.view.Details" type="XML"/>
+			<mvc:XMLView id="idContainerDetailsXMLView" viewName="de.santos.employees.view.Details" type="XML"/>
 		</f:midColumnPages>
+
+		<f:endColumnPages>
+			<mvc:XMLView id="idContainerOrdersDetailsXMLView" viewName="de.santos.employees.view.OrdersDetails" type="XML"/>
+		</f:endColumnPages>
 
 	</f:FlexibleColumnLayout>
 

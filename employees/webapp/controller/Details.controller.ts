@@ -13,6 +13,8 @@ import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
 import { DatePicker$ChangeEvent } from "sap/m/DatePicker";
 import { Input$LiveChangeEvent } from "sap/m/Input";
 import { Select$ChangeEvent } from "sap/m/Select";
+import Event from "sap/ui/base/Event";
+import ObjectListItem from "sap/m/ObjectListItem";
 
 
 /**
@@ -245,6 +247,15 @@ export default class Details extends BaseController {
         const model = new JSONModel(object);
         const results = await utils.crud("delete", model);
         this.showIncidents(results);
-        
-    }
+    };
+
+    public onColumnListItemOrdersPress(event: Event): void {
+        const item = event.getSource() as ObjectListItem;
+        const context = item.getBindingContext("northwindModel") as Context;
+        const objectContext = context.getObject() as any;
+        const orderId = objectContext.OrderID;
+        const router = this.getRouterHelper() as Router;
+
+        router.navTo("RouteOrdersDetails", {orderId});
+    };
 };

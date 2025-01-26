@@ -122,7 +122,17 @@
                     "name": "RouteDetails",
                     "pattern": "Employees({index})",
                     "target": [
+                        "TargetMaster",
                         "TargetDetails"
+                    ]
+                },
+                                {
+                    "name": "RouteOrdersDetails",
+                    "pattern": "Orders({orderId})",
+                    "target": [
+                        "TargetMaster",
+                        "TargetDetails",
+                        "TargetOrdersDetails"
                     ]
                 }
             ],
@@ -153,6 +163,16 @@
                     "parent": "TargetContainer",
                     "controlId": "idFlexibleColumnLayout",
                     "controlAggregation": "midColumnPages"
+                },
+                "TargetOrdersDetails": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "OrdersDetails",
+                    "viewName": "OrdersDetails",
+                    "parent": "TargetContainer",
+                    "controlId": "idFlexibleColumnLayout",
+                    "controlAggregation": "endColumnPages"
                 }
             }
         },

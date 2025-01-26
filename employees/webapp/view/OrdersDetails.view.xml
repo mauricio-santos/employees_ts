@@ -1,0 +1,54 @@
+<mvc:View controllerName="de.santos.employees.controller.OrdersDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+>
+    <Page id="idOrdersPage" title="{i18n>ordersDetails}">
+        <Panel id="idOrdersPanel">
+            <form:SimpleForm id="idOrderSimpleForm" layout="ResponsiveGridLayout" title="{i18n>informations}">
+
+                <Label id="idCustomerIDLabel" text="{i18n>customerId}"/>
+                <Text id="idCustomerIDText" text="{northwindModel>CustomerID}"/>
+
+                <Label id="idEmployeeIDOrderLabel" text="{i18n>employeeId}"/>
+                <Text id="idEmployeeIDText" text="{northwindModel>EmployeeID}"/>
+
+                <Label id="idOrderDateLabel" text="{i18n>orderDate}"/>
+                <Text id="idOrderDateText" 
+                    text="{
+                        constraints : {displayFormat : 'Date'}, 
+                        path: 'northwindModel>OrderDate',
+                        type: 'sap.ui.model.odata.type.DateTime'
+                    }"
+                />
+
+                <Label id="idRequiredDateLabel" text="{i18n>requiredDate}"/>
+                <Text id="idRequiredDateText"
+                    text="{
+                        constraints : {displayFormat : 'Date'},
+                        path: 'northwindModel>RequiredDate',
+                        type: 'sap.ui.model.odata.type.DateTime'
+                    }"
+                />
+
+                <Label id="idShippedDateLabel" text="{i18n>shippedDate}"/>
+                <Text id="idShippedDateText"
+                    text="{
+                        path: 'northwindModel>ShippedDate',
+                        type: 'sap.ui.model.odata.type.DateTime'
+                    }" 
+                />
+
+                <Label id="idShipNameLabel" text="{i18n>shipName}"/>
+                <Text id="idShipNameText" text="{northwindModel>ShipName}"/>
+
+                <Label id="idShipAddressLabel" text="{i18n>shipAddress}"/>
+                <Text id="idShipAddressOrderText" text="{northwindModel>ShipAddress}, {northwindModel>ShipPostalCode} {northwindModel>ShipCity}"/>
+
+                <Label id="idCountryShipLabel" text="{i18n>country}"/>
+                <Text id="idShipCountryOrderText" text="{northwindModel>ShipCountry}"/>
+
+            </form:SimpleForm>
+        </Panel>
+    </Page>
+</mvc:View>
