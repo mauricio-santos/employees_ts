@@ -28,16 +28,19 @@ export default class Utils {
         return "mauricio.vieira@email.de"
     };
 
-    public async crud(action: string, model: JSONModel): Promise<void | ODataListBinding> {
+    public async crud(action: string, model: JSONModel, signature = false): Promise<void | ODataListBinding> {
         const resourceBundle = this.resourceBundle;
         const _this = this;
 
         //adding the filters attribute to perform reading in all CRUD operations
         const data = model.getProperty("/data");
-        const filters = [
-            new Filter("SapId", FilterOperator.EQ, data.SapId),
-            new Filter("EmployeeId", FilterOperator.EQ, data.EmployeeId)
-        ];
+        let filters = [];
+
+        !signature
+            ? filters.push(new Filter("EmployeeId", FilterOperator.EQ, data.EmployeeId))
+            : filters.push(new Filter("OrderId", FilterOperator.EQ, data.OrderId));
+
+        filters.push(new Filter("SapId", FilterOperator.EQ, data.SapId));
         model.setProperty("/filters", filters);
 
         return new Promise((resolve, reject) => {
@@ -77,9 +80,9 @@ export default class Utils {
         });
     };
 
-    public async read(data: JSONModel): Promise<void  | ODataListBinding> {
+    public async read(data: JSONModel, signature?: boolean): Promise<void  | ODataListBinding> {
         const model = this.model;
-        const url = data.getProperty("/url").split("(")[0]; // /IncidentsSet
+        const url = !signature ? data.getProperty("/url").split("(")[0] : data.getProperty("/url");
         const filters = data.getProperty("/filters");
        
         return new Promise((resolve, reject) => {

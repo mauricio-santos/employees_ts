@@ -18,6 +18,7 @@ export default class Signature extends Control {
     constructor(id?: string, settings?: $SignatureSettings) { super(id, settings); }
 
     private signaturePad: SignaturePad;
+    private flag: boolean = false;
 
     public init(): void {
         // this.setAggregation("_toolbar", new Toolbar({
@@ -84,10 +85,31 @@ export default class Signature extends Control {
         // this.signaturePad.minWidth = 5;
         // this.signaturePad.maxWidth = 10;
         this.signaturePad.penColor = "rgb(66, 133, 244)";
+
+        canvas.addEventListener("pointerdown", () => {
+            this.flag = true;
+        });
+    };
+
+    public isFill(): boolean {
+        return this.flag;
     };
 
     public clear(): void {
-        this.signaturePad.clear();
-    }
+        try {
+            this.flag = false;
+            this.signaturePad.clear();  
+        } catch (error) {}
+    };
+
+    public getSignature(): string {
+        return this.signaturePad.toDataURL();
+    };
+
+    public setSignature(dataUrl: string): void {     
+        try {
+            this.signaturePad.fromDataURL(dataUrl, {width: 300, height: 150});
+        } catch (error) {}
+    };
 
 };
