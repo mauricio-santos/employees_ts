@@ -6,8 +6,10 @@ metadata:
 type: application
 server:
   customMiddleware:
-    - name: fiori-tools-proxy
+    - name: ui5-tooling-modules-middleware
       afterMiddleware: compression
+    - name: fiori-tools-proxy
+      afterMiddleware: ui5-tooling-modules-middleware
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         ui5:
@@ -46,6 +48,8 @@ server:
           - /Component-preload.js
 builder:
   customTasks:
+    - name: ui5-tooling-modules-task
+      afterTask: replaceVersion
     - name: ui5-tooling-transpile-task
       afterTask: replaceVersion
       configuration:

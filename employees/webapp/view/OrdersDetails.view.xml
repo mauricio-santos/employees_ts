@@ -1,54 +1,138 @@
 <mvc:View controllerName="de.santos.employees.controller.OrdersDetails"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+    xmlns:sign="de.santos.employees.control"
 >
-    <Page id="idOrdersPage" title="{i18n>ordersDetails}">
-        <Panel id="idOrdersPanel">
-            <form:SimpleForm id="idOrderSimpleForm" layout="ResponsiveGridLayout" title="{i18n>informations}">
+    <uxap:ObjectPageLayout id="idOrderObjectPageLayout">
 
-                <Label id="idCustomerIDLabel" text="{i18n>customerId}"/>
-                <Text id="idCustomerIDText" text="{northwindModel>CustomerID}"/>
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle id="idOrderObjectPageDynamicHeaderTitle">
+                <uxap:expandedHeading>
+                    <Title id="idCustomerIdTitle" text="{i18n>orderDetail} ({northwindModel>OrderID})"/>
+                </uxap:expandedHeading>
 
-                <Label id="idEmployeeIDOrderLabel" text="{i18n>employeeId}"/>
-                <Text id="idEmployeeIDText" text="{northwindModel>EmployeeID}"/>
+                <uxap:snappedHeading>
+                    <Title id="idEmployeeIdTitle" text="{i18n>employeeId}: {northwindModel>EmployeeID}"/>
+                </uxap:snappedHeading>
 
-                <Label id="idOrderDateLabel" text="{i18n>orderDate}"/>
-                <Text id="idOrderDateText" 
-                    text="{
-                        constraints : {displayFormat : 'Date'}, 
-                        path: 'northwindModel>OrderDate',
-                        type: 'sap.ui.model.odata.type.DateTime'
-                    }"
-                />
+                <uxap:expandedContent>
+                    <Text id="idOrderIdExpText" text="{i18n>customerId}: {northwindModel>CustomerID}"/>
+                </uxap:expandedContent>
 
-                <Label id="idRequiredDateLabel" text="{i18n>requiredDate}"/>
-                <Text id="idRequiredDateText"
-                    text="{
-                        constraints : {displayFormat : 'Date'},
-                        path: 'northwindModel>RequiredDate',
-                        type: 'sap.ui.model.odata.type.DateTime'
-                    }"
-                />
+                <uxap:snappedContent>
+                    <Text id="idOrderIdSnapText" text="{i18n>orderId}: {northwindModel>OrderID}"/>
+                </uxap:snappedContent>
+            
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
 
-                <Label id="idShippedDateLabel" text="{i18n>shippedDate}"/>
-                <Text id="idShippedDateText"
-                    text="{
-                        path: 'northwindModel>ShippedDate',
-                        type: 'sap.ui.model.odata.type.DateTime'
-                    }" 
-                />
+        <uxap:headerContent>
+            <FlexBox id="idOrderFlexBox" justifyContent="SpaceBetween">
 
-                <Label id="idShipNameLabel" text="{i18n>shipName}"/>
-                <Text id="idShipNameText" text="{northwindModel>ShipName}"/>
+                <HBox id="idOrderDateHBox" class="sapUiSmallMarginEnd">
+                    <VBox id="idOrderDateVBox">
+                        <Label id="idOrderDateLabel" class="boldElement" text="{i18n>orderDate}"/>
+                        <Text id="idOrderDateText" 
+                            text="{
+                                constraints : {displayFormat : 'Date'}, 
+                                path: 'northwindModel>OrderDate',
+                                type: 'sap.ui.model.odata.type.DateTime'
+                            }" 
+                        />
+                    </VBox>
+                </HBox>
 
-                <Label id="idShipAddressLabel" text="{i18n>shipAddress}"/>
-                <Text id="idShipAddressOrderText" text="{northwindModel>ShipAddress}, {northwindModel>ShipPostalCode} {northwindModel>ShipCity}"/>
+                <HBox id="idRequiredDateHBox" class="sapUiSmallMarginEnd">
+                    <VBox id="idRequiredDateVBox">
+                        <Label id="idRequiredDateLabel" class="boldElement" text="{i18n>requiredDate}"/>
+                        <Text id="idRequiredDateText" 
+                            text="{
+                                constraints : {displayFormat : 'Date'},
+                                path: 'northwindModel>RequiredDate',
+                                type: 'sap.ui.model.odata.type.DateTime'
+                            }" 
+                        />
+                    </VBox>
+                </HBox>
 
-                <Label id="idCountryShipLabel" text="{i18n>country}"/>
-                <Text id="idShipCountryOrderText" text="{northwindModel>ShipCountry}"/>
+                <HBox id="idShippedDateHBox" class="sapUiSmallMarginEnd">
+                    <VBox id="idShippedDateVBox">
+                        <Label id="idShippedDateLabel" class="boldElement" text="{i18n>shippedDate}"/>
+                        <Text id="idShippedDateText" text="{
+                                path: 'northwindModel>ShippedDate',
+                                type: 'sap.ui.model.odata.type.DateTime'
+                            }" />
+                    </VBox>
+                </HBox>
 
-            </form:SimpleForm>
-        </Panel>
-    </Page>
+                <HBox id="idShipNameHBox" class="sapUiSmallMarginEnd">
+                    <VBox id="idShipNameVBox">
+                        <Label id="idShipNameLabel" class="boldElement" text="{i18n>shipName}"/>
+                        <Text id="idShipNameText" text="{northwindModel>ShipName}"/>
+                    </VBox>
+                </HBox>
+
+                <HBox id="idShipAddressHBox" class="sapUiSmallMarginEnd">
+                    <VBox id="idShipAddressVBox">
+                        <Label id="idShipAddressLabel" text="{i18n>shipAddress}"/>
+                        <Text id="idShipAddressOrderText" text="{northwindModel>ShipAddress}, {northwindModel>ShipPostalCode} {northwindModel>ShipCity}"/>
+                    </VBox>
+                </HBox>
+
+                <HBox id="idShipCountryHBox" class="sapUiSmallMarginEnd">
+                    <VBox id="idShipCountryVBox">
+                        <Label id="idCountryShipLabel" text="{i18n>country}"/>
+                        <Text id="idShipCountryOrderText" text="{northwindModel>ShipCountry}"/>
+                    </VBox>
+                </HBox>
+
+            </FlexBox>
+        </uxap:headerContent>
+
+        <uxap:sections>
+            <uxap:ObjectPageSection id="idSignatureObjectPageSection" title="{i18n>signature}">
+                <uxap:ObjectPageSubSection id="idSignatureObjectPageSubSection">
+                
+                    <FlexBox id="idSignatureSectionFlexBox" 
+                        alignItems="Center" 
+                        justifyContent="Center"
+                        direction="Column"
+                        width="100%"
+                    >
+                        <FlexBox id="idSignatureFlexBox" width="auto">
+                            <sign:Signature id="idSignature"/>
+                        </FlexBox>
+
+                        <HBox id="idBtnSignatureHBox" class="sapUiTinyMarginTop" 
+                            width="300px"
+                            justifyContent="Center"
+                        >
+                            <Button id="idSaveSignatureButton" class="sapUiSmallMarginEnd"
+                                text="{i18n>save}"
+                                type="Accept"
+                                width="63.36px"
+                                press="onButtonSaveSignaturePress"
+                            />
+
+                            <Button id="idClearSignatureButton" class="sapUiSmallMarginEnd"
+                                text="{i18n>clear}"
+                                type="Reject"
+                                width="63.36px"
+                                press="onButtonClearSignaturePress"
+                            />
+
+                            <Button id="idRefreshSignatureButton"
+                                text="{i18n>refresh}"
+                                type="Emphasized"
+                                press="onButtonRefreshSignaturePress"
+                            />
+                        </HBox>
+                    </FlexBox>
+
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+
+    </uxap:ObjectPageLayout>
 </mvc:View>

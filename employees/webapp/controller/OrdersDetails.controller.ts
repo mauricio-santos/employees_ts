@@ -2,11 +2,14 @@ import { Route$PatternMatchedEvent } from "sap/ui/core/routing/Route";
 import BaseController from "../helpers/BaseController";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import View from "sap/ui/core/mvc/View";
+import Signature from "../control/Signature";
 
 /**
  * @namespace de.santos.employees.controller
  */
 export default class OrderDetails extends BaseController {
+
+    private signature: Signature
 
     public onInit(): void {
         const router = this.getRouterHelper();
@@ -27,6 +30,18 @@ export default class OrderDetails extends BaseController {
             path: `/Orders(${orderId})`,
             model: 'northwindModel'
         });
+    };
+
+    public onButtonSaveSignaturePress(): void {
         
+    };
+
+    public onButtonClearSignaturePress(): void {
+        const signature = this.byId("idSignature") as Signature;
+        signature.clear();
+    };
+
+    public onButtonRefreshSignaturePress(): void {
+
     };
 }
