@@ -7,6 +7,7 @@ import Context from "sap/ui/model/odata/v2/Context";
 import Utils from "../utils/Utils";
 import MessageBox from "sap/m/MessageBox";
 import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
+import ObjectPageLayout from "sap/uxap/ObjectPageLayout";
 
 /**
  * @namespace de.santos.employees.controller
@@ -18,6 +19,7 @@ export default class OrderDetails extends BaseController {
         const orderId = routeParam.orderId;
         const layoutViewModel = this.getModelHelper("layoutViewModel") as JSONModel;
         const view = this.getView() as View;
+        const objectPageLayout = this.byId("idOrderObjectPageLayout") as ObjectPageLayout
         const $this = this;
 
         
@@ -32,6 +34,7 @@ export default class OrderDetails extends BaseController {
                 change: function() {
                     $this.onButtonClearSignaturePress();
                     $this.readSignature();
+                    objectPageLayout.setBusy(false);
                 }
             }
         });

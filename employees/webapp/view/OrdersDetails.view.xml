@@ -4,7 +4,7 @@
     xmlns:uxap="sap.uxap"
     xmlns:sign="de.santos.employees.control"
 >
-    <uxap:ObjectPageLayout id="idOrderObjectPageLayout">
+    <uxap:ObjectPageLayout id="idOrderObjectPageLayout" busy="true" busyIndicatorDelay="0">
 
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="idOrderObjectPageDynamicHeaderTitle">
