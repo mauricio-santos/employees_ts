@@ -3,6 +3,7 @@
 	xmlns="sap.m"
     xmlns:uxap="sap.uxap"
     xmlns:sign="de.santos.employees.control"
+    xmlns:upload="sap.m.upload"
 >
     <uxap:ObjectPageLayout id="idOrderObjectPageLayout" busy="true" busyIndicatorDelay="0">
 
@@ -93,43 +94,58 @@
         <uxap:sections>
             <uxap:ObjectPageSection id="idSignatureObjectPageSection" title="{i18n>signature}">
                 <uxap:ObjectPageSubSection id="idSignatureObjectPageSubSection">
-                
-                    <FlexBox id="idSignatureSectionFlexBox" 
-                        alignItems="Center" 
-                        justifyContent="Center"
-                        direction="Column"
-                        width="100%"
-                    >
-                        <FlexBox id="idSignatureFlexBox" width="auto">
-                            <sign:Signature id="idSignature"/>
-                        </FlexBox>
-
-                        <HBox id="idBtnSignatureHBox" class="sapUiTinyMarginTop" 
-                            width="300px"
+                    <uxap:blocks>
+                        <FlexBox id="idSignatureSectionFlexBox" 
+                            alignItems="Center" 
                             justifyContent="Center"
+                            direction="Column"
+                            width="100%"
                         >
-                            <Button id="idSaveSignatureButton" class="sapUiSmallMarginEnd"
-                                text="{i18n>save}"
-                                type="Accept"
-                                width="63.36px"
-                                press="onButtonSaveSignaturePress"
-                            />
+                            <FlexBox id="idSignatureFlexBox" width="auto">
+                                <sign:Signature id="idSignature"/>
+                            </FlexBox>
 
-                            <Button id="idClearSignatureButton" class="sapUiSmallMarginEnd"
-                                text="{i18n>clear}"
-                                type="Reject"
-                                width="63.36px"
-                                press="onButtonClearSignaturePress"
-                            />
+                            <HBox id="idBtnSignatureHBox" class="sapUiTinyMarginTop" 
+                                width="300px"
+                                justifyContent="Center"
+                            >
+                                <Button id="idSaveSignatureButton" class="sapUiSmallMarginEnd"
+                                    text="{i18n>save}"
+                                    type="Accept"
+                                    width="63.36px"
+                                    press="onButtonSaveSignaturePress"
+                                />
 
-                            <Button id="idRefreshSignatureButton"
-                                text="{i18n>refresh}"
-                                type="Emphasized"
-                                press="onButtonRefreshSignaturePress"
-                            />
-                        </HBox>
-                    </FlexBox>
+                                <Button id="idClearSignatureButton" class="sapUiSmallMarginEnd"
+                                    text="{i18n>clear}"
+                                    type="Reject"
+                                    width="63.36px"
+                                    press="onButtonClearSignaturePress"
+                                />
 
+                                <Button id="idRefreshSignatureButton"
+                                    text="{i18n>refresh}"
+                                    type="Emphasized"
+                                    press="onButtonRefreshSignaturePress"
+                                />
+                            </HBox>
+                        </FlexBox>
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection id="idUploadObjectPageSection" title="{i18n>attachments}">
+                <uxap:ObjectPageSubSection id="idUploadObjectPageSubSection">
+                    <uxap:blocks>
+                        <upload:UploadSet id="idUploadSet"
+                            multiple="true"
+                            uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet"
+                            beforeUploadStarts="onUploadSetBeforeUploadStarts"
+                            uploadCompleted="onUploadSetUploadCompleted"
+                            afterItemRemoved="onUploadSetAfterItemRemoved"
+                        >
+                        </upload:UploadSet>
+                    </uxap:blocks>
                 </uxap:ObjectPageSubSection>
             </uxap:ObjectPageSection>
         </uxap:sections>
