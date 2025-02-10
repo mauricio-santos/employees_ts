@@ -14,6 +14,7 @@ import ODataModel from "sap/ui/model/odata/v2/ODataModel";
 import Item from "sap/ui/core/Item";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
+import Router from "sap/ui/core/routing/Router";
 
 /**
  * @namespace de.santos.employees.controller
@@ -131,8 +132,8 @@ export default class OrderDetails extends BaseController {
             path: 'zIncidences>/FilesSet',
             filters: [
                 new Filter("OrderId", FilterOperator.EQ, orderId,),
-                // new Filter("SapId", FilterOperator.EQ, sapId),
-                // new Filter("EmployeeId", FilterOperator.EQ, employeeId)
+                new Filter("SapId", FilterOperator.EQ, sapId),
+                new Filter("EmployeeId", FilterOperator.EQ, employeeId)
             ],
             template: new UploadSetItem({
                 fileName: "{zIncidences>FileName}",
@@ -141,7 +142,7 @@ export default class OrderDetails extends BaseController {
                 url: { //Download URL
                     path: "zIncidences>__metadata/media_src", // Full URL for media_src
                     formatter: function (mediaSrc: string) {
-                        return mediaSrc ? mediaSrc.replace(/^https?:\/\/[^/]+/, "") : "";
+                        return mediaSrc ? "/desantosemployees" + mediaSrc.replace(/^https?:\/\/[^/]+/, "") : "";
                     }
                 }
             })
@@ -194,5 +195,15 @@ export default class OrderDetails extends BaseController {
 
         const uploadSet = this.byId("idUploadSet") as UploadSet;
         uploadSet.getBinding("items")?.refresh();
+    };
+
+    public onButtonCloseDetailViewPress(): void {
+        const modelView = this.getModelHelper("layoutViewModel") as JSONModel;
+        const router = this.getRouterHelper() as Router;
+        const bindingContext = this.getView()?.getBindingContext("northwindModel") as Context;
+        const employeeId = bindingContext.getProperty("EmployeeID");
+        
+        modelView.setProperty("/layout", "TwoColumnsMidExpanded");
+        router.navTo("RouteDetails", {index: employeeId});
     };
 }

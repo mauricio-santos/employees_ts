@@ -9,6 +9,10 @@
 
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="idOrderObjectPageDynamicHeaderTitle">
+                <uxap:actions>
+                    <Button id="idCloseDetailViewButton" icon="sap-icon://decline" type="Reject" press="onButtonCloseDetailViewPress"/>
+                </uxap:actions>
+
                 <uxap:expandedHeading>
                     <Title id="idCustomerIdTitle" text="{i18n>orderDetail} ({northwindModel>OrderID})"/>
                 </uxap:expandedHeading>
@@ -139,10 +143,11 @@
                     <uxap:blocks>
                         <upload:UploadSet id="idUploadSet"
                             multiple="true"
-                            uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet"
+                            uploadUrl="/desantosemployees/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet"
                             beforeUploadStarts="onUploadSetBeforeUploadStarts"
                             uploadCompleted="onUploadSetUploadCompleted"
                             afterItemRemoved="onUploadSetAfterItemRemoved"
+                            mode="None"
                         >
                         </upload:UploadSet>
                     </uxap:blocks>

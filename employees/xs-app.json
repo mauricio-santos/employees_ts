@@ -3,14 +3,21 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/resources/(.*)$",
-      "target": "/resources/$1",
+      "source": "^/V2/Northwind/Northwind.svc/(.*)$",
+      "target": "/V2/Northwind/Northwind.svc/$1",
+      "destination": "Northwind",
       "authenticationType": "none",
-      "destination": "ui5"
+      "csrfProtection": false
+    },
+    { "source": "^/sap/opu/odata/sap/YSAPUI5_SRV_01/(.*)$",
+      "target": "/sap/opu/odata/sap/YSAPUI5_SRV_01/$1",
+      "destination": "logaligroupERP",
+      "authenticationType": "none",
+      "csrfProtection": false
     },
     {
-      "source": "^/test-resources/(.*)$",
-      "target": "/test-resources/$1",
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
       "authenticationType": "none",
       "destination": "ui5"
     },

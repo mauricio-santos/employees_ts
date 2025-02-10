@@ -1,6 +1,6 @@
 _schema-version: "3.2"
 ID: employees_ts
-version: 0.0.1
+version: 0.0.5
 modules:
 - name: employees-ts-approuter
   type: approuter.nodejs
